@@ -1,0 +1,1734 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarketPlazzze — Всё для жизни в одном месте</title>
+    <link rel="icon" type="image/png" href="https://image.qwenlm.ai/public_source/7d00695c-9947-4fab-a461-6d9dbc676c6c/1b4b7af90-c53b-4739-ad84-6813d7aba0b1.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/400.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/500.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/600.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/700.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/800.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0066FF',
+                        'primary-dark': '#0055EE',
+                        'primary-light': '#0088FF',
+                        'bg-main': '#F8F9FA',
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        'card': '16px',
+                        'btn': '12px',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #F8F9FA; }
+        
+        .logo-gradient {
+            background: linear-gradient(135deg, #0055EE 0%, #0088FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .logo-badge {
+            background: linear-gradient(135deg, #0055EE 0%, #0088FF 100%);
+            color: white;
+            -webkit-text-fill-color: white;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #0055EE 0%, #0088FF 100%);
+        }
+        
+        .card-shadow {
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        }
+        
+        .card-shadow-hover:hover {
+            box-shadow: 0 8px 30px rgba(0, 102, 255, 0.12);
+        }
+        
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes slideDown {
+            from { transform: translateY(-10px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes scaleIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.3); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes cartBounce {
+            0% { transform: scale(1); }
+            30% { transform: scale(1.4); }
+            60% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes toastSlide {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        
+        .animate-slideUp { animation: slideUp 0.4s ease-out; }
+        .animate-slideDown { animation: slideDown 0.3s ease-out; }
+        .animate-scaleIn { animation: scaleIn 0.3s ease-out; }
+        .animate-bounceIn { animation: bounceIn 0.5s ease-out; }
+        .animate-heartBeat { animation: heartBeat 0.6s ease-out; }
+        .animate-cartBounce { animation: cartBounce 0.4s ease-out; }
+        .animate-fadeIn { animation: fadeIn 0.3s ease-out; }
+        .animate-toastSlide { animation: toastSlide 0.3s ease-out; }
+        
+        .product-card {
+            transition: all 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-4px);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #0055EE 0%, #0088FF 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+        
+        .nav-item {
+            transition: all 0.2s ease;
+        }
+        
+        .nav-item.active {
+            color: #0066FF;
+        }
+        
+        .nav-item.active svg {
+            stroke-width: 2.5;
+        }
+        
+        .category-chip {
+            transition: all 0.2s ease;
+        }
+        
+        .category-chip.active {
+            background: linear-gradient(135deg, #0055EE 0%, #0088FF 100%);
+            color: white;
+        }
+        
+        .bank-card {
+            background: linear-gradient(135deg, #0055EE 0%, #0088FF 100%);
+            box-shadow: 0 10px 40px rgba(0, 102, 255, 0.3);
+        }
+        
+        .modal-overlay {
+            backdrop-filter: blur(8px);
+        }
+        
+        .infinite-loading {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+        
+        .star-filled { color: #FFB800; }
+        .star-empty { color: #E0E0E0; }
+        
+        .page-content {
+            display: none;
+        }
+        
+        .page-content.active {
+            display: block;
+        }
+        
+        .checkout-section {
+            display: none;
+        }
+        
+        .checkout-section.active {
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .desktop-nav { display: none; }
+            .mobile-nav { display: flex !important; }
+            .main-content { padding-bottom: 80px; }
+        }
+        
+        @media (min-width: 769px) {
+            .mobile-nav { display: none !important; }
+            .main-content { padding-bottom: 0; }
+        }
+        
+        .search-dropdown {
+            display: none;
+        }
+        
+        .search-dropdown.show {
+            display: block;
+        }
+        
+        .qty-btn {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        
+        .qty-btn:hover {
+            background: #0066FF;
+            color: white;
+        }
+        
+        .profile-tab {
+            transition: all 0.2s ease;
+        }
+        
+        .profile-tab:hover {
+            background: #f0f4ff;
+        }
+        
+        .profile-tab.active {
+            background: #e8f0fe;
+            color: #0066FF;
+        }
+        
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 12px;
+        }
+        
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        @media (max-width: 640px) {
+            .toast-container {
+                right: 10px;
+                left: 10px;
+            }
+        }
+        
+        .badge-count {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            min-width: 18px;
+            height: 18px;
+            background: #FF3B30;
+            color: white;
+            border-radius: 50%;
+            font-size: 11px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 4px;
+        }
+        
+        .filter-dropdown {
+            position: relative;
+        }
+        
+        .filter-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            z-index: 100;
+            min-width: 200px;
+            padding: 8px;
+        }
+        
+        .filter-menu.show {
+            display: block;
+            animation: slideDown 0.2s ease-out;
+        }
+        
+        .review-stars {
+            display: inline-flex;
+            gap: 2px;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #0066FF;
+            box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="font-inter text-gray-800">
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Quick View Modal -->
+    <div id="quickViewModal" class="fixed inset-0 z-50 hidden">
+        <div class="modal-overlay absolute inset-0 bg-black/40" onclick="closeQuickView()"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4">
+            <div class="bg-white rounded-card max-w-2xl w-full max-h-[90vh] overflow-y-auto card-shadow animate-scaleIn relative">
+                <button onclick="closeQuickView()" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition z-10">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+                <div id="quickViewContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkoutModal" class="fixed inset-0 z-50 hidden">
+        <div class="modal-overlay absolute inset-0 bg-black/40" onclick="closeCheckout()"></div>
+        <div class="absolute inset-0 flex items-start justify-center p-4 pt-[10vh]">
+            <div class="bg-white rounded-card max-w-lg w-full max-h-[80vh] overflow-y-auto card-shadow animate-scaleIn">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-xl font-bold">Оформление заказа</h2>
+                        <button onclick="closeCheckout()" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition">
+                            <i data-lucide="x" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Delivery -->
+                    <div class="mb-6">
+                        <h3 class="font-semibold mb-3 flex items-center gap-2">
+                            <i data-lucide="truck" class="w-5 h-5 text-primary"></i>
+                            Способ доставки
+                        </h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-3 p-3 rounded-btn border-2 border-primary bg-blue-50 cursor-pointer">
+                                <input type="radio" name="delivery" value="courier" checked class="accent-primary">
+                                <span class="text-sm">Курьером до двери — <strong>299 ₽</strong></span>
+                            </label>
+                            <label class="flex items-center gap-3 p-3 rounded-btn border-2 border-gray-200 cursor-pointer hover:border-primary/50">
+                                <input type="radio" name="delivery" value="pickup" class="accent-primary">
+                                <span class="text-sm">В пункт выдачи — <strong>Бесплатно</strong></span>
+                            </label>
+                            <label class="flex items-center gap-3 p-3 rounded-btn border-2 border-gray-200 cursor-pointer hover:border-primary/50">
+                                <input type="radio" name="delivery" value="express" class="accent-primary">
+                                <span class="text-sm">Экспресс (сегодня) — <strong>599 ₽</strong></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Bonus Points -->
+                    <div class="mb-6">
+                        <h3 class="font-semibold mb-3 flex items-center gap-2">
+                            <i data-lucide="gift" class="w-5 h-5 text-primary"></i>
+                            Баллы MPZZZ
+                        </h3>
+                        <div class="p-3 bg-gray-50 rounded-btn">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm text-gray-600">Доступно баллов:</span>
+                                <span class="font-bold text-primary" id="checkoutBonusPoints">1,250</span>
+                            </div>
+                            <label class="flex items-center gap-3 cursor-pointer">
+                                <input type="checkbox" id="useBonusPoints" class="accent-primary" onchange="updateCheckoutTotal()">
+                                <span class="text-sm">Списать <strong>1,250 баллов</strong> (скидка 125 ₽)</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Promo Code -->
+                    <div class="mb-6">
+                        <h3 class="font-semibold mb-3 flex items-center gap-2">
+                            <i data-lucide="ticket" class="w-5 h-5 text-primary"></i>
+                            Промокод
+                        </h3>
+                        <div class="flex gap-2">
+                            <input type="text" id="promoInput" placeholder="Введите промокод" class="flex-1 px-4 py-2 border-2 border-gray-200 rounded-btn text-sm">
+                            <button onclick="applyPromo()" class="btn-primary text-white px-4 py-2 rounded-btn text-sm font-medium">Применить</button>
+                        </div>
+                        <p id="promoResult" class="text-xs mt-2 hidden"></p>
+                    </div>
+                    
+                    <!-- Total -->
+                    <div class="border-t pt-4 mb-6">
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Товары:</span>
+                                <span id="checkoutSubtotal">0 ₽</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Доставка:</span>
+                                <span id="checkoutDelivery">299 ₽</span>
+                            </div>
+                            <div class="flex justify-between text-primary" id="checkoutDiscountRow" style="display:none">
+                                <span>Скидка:</span>
+                                <span id="checkoutDiscount">-0 ₽</span>
+                            </div>
+                            <div class="flex justify-between font-bold text-lg pt-2 border-t">
+                                <span>Итого:</span>
+                                <span id="checkoutTotal" class="text-primary">0 ₽</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="placeOrder()" class="btn-primary w-full text-white py-3 rounded-btn font-semibold text-base">
+                        Оформить заказ
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Success Modal -->
+    <div id="orderSuccessModal" class="fixed inset-0 z-50 hidden">
+        <div class="modal-overlay absolute inset-0 bg-black/40" onclick="closeOrderSuccess()"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4">
+            <div class="bg-white rounded-card max-w-sm w-full p-8 text-center card-shadow animate-bounceIn">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i data-lucide="check" class="w-8 h-8 text-green-500"></i>
+                </div>
+                <h2 class="text-xl font-bold mb-2">Данная функция временно ограничена</h2>
+                <p class="text-gray-500 text-sm mb-6">Мы работаем над улучшением сервиса. Пожалуйста, попробуйте позже.</p>
+                <button onclick="closeOrderSuccess()" class="btn-primary text-white px-6 py-2 rounded-btn font-medium">Понятно</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-white sticky top-0 z-40 card-shadow">
+        <div class="max-w-7xl mx-auto px-4 py-3">
+            <div class="flex items-center gap-4">
+                <!-- Logo -->
+                <a href="#" onclick="switchTab('home')" class="flex-shrink-0">
+                    <span class="logo-badge text-lg sm:text-xl font-extrabold px-3 py-1.5 rounded-lg inline-block">MarketPlazzze</span>
+                </a>
+                
+                <!-- Search Bar - Desktop -->
+                <div class="hidden md:flex flex-1 max-w-xl relative">
+                    <input type="text" id="headerSearch" placeholder="Найти товары..." class="w-full pl-10 pr-4 py-2.5 bg-gray-100 rounded-btn text-sm border-2 border-transparent focus:border-primary transition" oninput="handleHeaderSearch(this.value)" onfocus="showSearchDropdown()" onblur="setTimeout(()=>hideSearchDropdown(), 200)">
+                    <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    <div id="searchDropdown" class="search-dropdown absolute top-full left-0 right-0 bg-white rounded-btn shadow-xl mt-2 max-h-64 overflow-y-auto z-50"></div>
+                </div>
+                
+                <!-- Right Icons - Desktop -->
+                <div class="hidden md:flex items-center gap-1 ml-auto">
+                    <button onclick="switchTab('home')" class="nav-item active desktop-nav-btn p-2 rounded-btn hover:bg-gray-100 relative" data-tab="home" title="Главная">
+                        <i data-lucide="home" class="w-5 h-5"></i>
+                        <span class="text-xs mt-0.5 block">Главная</span>
+                    </button>
+                    <button onclick="switchTab('catalog')" class="nav-item desktop-nav-btn p-2 rounded-btn hover:bg-gray-100 relative" data-tab="catalog" title="Каталог">
+                        <i data-lucide="grid-3x3" class="w-5 h-5"></i>
+                        <span class="text-xs mt-0.5 block">Каталог</span>
+                    </button>
+                    <button onclick="switchTab('favorites')" class="nav-item desktop-nav-btn p-2 rounded-btn hover:bg-gray-100 relative" data-tab="favorites" title="Избранное">
+                        <i data-lucide="heart" class="w-5 h-5"></i>
+                        <span class="badge-count hidden" id="favBadge">0</span>
+                        <span class="text-xs mt-0.5 block">Избранное</span>
+                    </button>
+                    <button onclick="switchTab('cart')" class="nav-item desktop-nav-btn p-2 rounded-btn hover:bg-gray-100 relative" data-tab="cart" title="Корзина">
+                        <i data-lucide="shopping-cart" class="w-5 h-5" id="cartIcon"></i>
+                        <span class="badge-count hidden" id="cartBadge">0</span>
+                        <span class="text-xs mt-0.5 block">Корзина</span>
+                    </button>
+                    <button onclick="switchTab('profile')" class="nav-item desktop-nav-btn p-2 rounded-btn hover:bg-gray-100 relative" data-tab="profile" title="Профиль">
+                        <i data-lucide="user" class="w-5 h-5"></i>
+                        <span class="text-xs mt-0.5 block">Профиль</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-nav fixed bottom-0 left-0 right-0 bg-white border-t z-40 justify-around py-1 px-2" style="display:none;">
+        <button onclick="switchTab('home')" class="nav-item active flex flex-col items-center p-2 text-gray-500 min-w-[56px]" data-tab="home">
+            <i data-lucide="home" class="w-5 h-5"></i>
+            <span class="text-[10px] mt-0.5">Главная</span>
+        </button>
+        <button onclick="switchTab('catalog')" class="nav-item flex flex-col items-center p-2 text-gray-500 min-w-[56px]" data-tab="catalog">
+            <i data-lucide="grid-3x3" class="w-5 h-5"></i>
+            <span class="text-[10px] mt-0.5">Каталог</span>
+        </button>
+        <button onclick="switchTab('favorites')" class="nav-item flex flex-col items-center p-2 text-gray-500 min-w-[56px] relative" data-tab="favorites">
+            <i data-lucide="heart" class="w-5 h-5"></i>
+            <span class="badge-count hidden" id="favBadgeMobile">0</span>
+            <span class="text-[10px] mt-0.5">Избранное</span>
+        </button>
+        <button onclick="switchTab('cart')" class="nav-item flex flex-col items-center p-2 text-gray-500 min-w-[56px] relative" data-tab="cart">
+            <i data-lucide="shopping-cart" class="w-5 h-5" id="cartIconMobile"></i>
+            <span class="badge-count hidden" id="cartBadgeMobile">0</span>
+            <span class="text-[10px] mt-0.5">Корзина</span>
+        </button>
+        <button onclick="switchTab('profile')" class="nav-item flex flex-col items-center p-2 text-gray-500 min-w-[56px]" data-tab="profile">
+            <i data-lucide="user" class="w-5 h-5"></i>
+            <span class="text-[10px] mt-0.5">Профиль</span>
+        </button>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content max-w-7xl mx-auto px-4 py-6">
+
+        <!-- HOME PAGE -->
+        <div id="page-home" class="page-content active">
+            <!-- Hero -->
+            <section class="hero-gradient rounded-card overflow-hidden mb-8 relative">
+                <div class="absolute inset-0 opacity-10">
+                    <img src="https://image.qwenlm.ai/public_source/7d00695c-9947-4fab-a461-6d9dbc676c6c/1cb4a7a94-baa6-4021-a08d-4a507871a3b7.png" class="w-full h-full object-cover" alt="">
+                </div>
+                <div class="relative z-10 p-8 sm:p-12 text-center sm:text-left">
+                    <h1 class="text-white text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-3">MarketPlazzze</h1>
+                    <p class="text-white/90 text-lg sm:text-xl mb-6">Всё для жизни в одном месте</p>
+                    <button onclick="switchTab('catalog')" class="bg-white text-primary px-6 py-3 rounded-btn font-semibold hover:shadow-lg transition inline-flex items-center gap-2">
+                        <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                        Перейти в каталог
+                    </button>
+                </div>
+            </section>
+
+            <!-- Popular Products -->
+            <section class="mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-xl sm:text-2xl font-bold">Популярные товары</h2>
+                    <button onclick="switchTab('catalog')" class="text-primary text-sm font-medium hover:underline">Все товары →</button>
+                </div>
+                <div id="popularProducts" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"></div>
+            </section>
+
+            <!-- Infinite Scroll -->
+            <section>
+                <h2 class="text-xl sm:text-2xl font-bold mb-6">Рекомендуем для вас</h2>
+                <div id="infiniteProducts" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"></div>
+                <div id="infiniteLoader" class="flex justify-center py-8">
+                    <div class="skeleton w-10 h-10 rounded-full"></div>
+                </div>
+            </section>
+        </div>
+
+        <!-- CATALOG PAGE -->
+        <div id="page-catalog" class="page-content">
+            <!-- Search -->
+            <div class="relative mb-4">
+                <input type="text" id="catalogSearch" placeholder="Поиск по каталогу..." class="w-full pl-10 pr-4 py-3 bg-white rounded-btn border-2 border-gray-200 text-sm focus:border-primary transition" oninput="filterCatalog()">
+                <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+            </div>
+            
+            <!-- Categories -->
+            <div class="flex gap-2 overflow-x-auto scrollbar-hide mb-4" id="catalogCategories">
+                <button class="category-chip active flex-shrink-0 px-4 py-2 rounded-btn bg-gray-100 text-sm font-medium" onclick="selectCategory(this, 'all')">Все</button>
+                <button class="category-chip flex-shrink-0 px-4 py-2 rounded-btn bg-gray-100 text-sm font-medium" onclick="selectCategory(this, 'electronics')">Электроника</button>
+                <button class="category-chip flex-shrink-0 px-4 py-2 rounded-btn bg-gray-100 text-sm font-medium" onclick="selectCategory(this, 'accessories')">Аксессуары</button>
+                <button class="category-chip flex-shrink-0 px-4 py-2 rounded-btn bg-gray-100 text-sm font-medium" onclick="selectCategory(this, 'home')">Для дома</button>
+                <button class="category-chip flex-shrink-0 px-4 py-2 rounded-btn bg-gray-100 text-sm font-medium" onclick="selectCategory(this, 'bags')">Сумки</button>
+            </div>
+            
+            <!-- Sort & Filters -->
+            <div class="flex items-center gap-3 mb-6 flex-wrap">
+                <div class="filter-dropdown">
+                    <button onclick="toggleFilterMenu()" class="flex items-center gap-2 px-4 py-2 bg-white rounded-btn border border-gray-200 text-sm hover:border-primary transition">
+                        <i data-lucide="sliders-horizontal" class="w-4 h-4"></i>
+                        Сортировка
+                    </button>
+                    <div id="filterMenu" class="filter-menu">
+                        <button onclick="sortProducts('default');toggleFilterMenu()" class="w-full text-left px-3 py-2 rounded-btn text-sm hover:bg-gray-50">По умолчанию</button>
+                        <button onclick="sortProducts('price-asc');toggleFilterMenu()" class="w-full text-left px-3 py-2 rounded-btn text-sm hover:bg-gray-50">Сначала дешёвые</button>
+                        <button onclick="sortProducts('price-desc');toggleFilterMenu()" class="w-full text-left px-3 py-2 rounded-btn text-sm hover:bg-gray-50">Сначала дорогие</button>
+                        <button onclick="sortProducts('rating');toggleFilterMenu()" class="w-full text-left px-3 py-2 rounded-btn text-sm hover:bg-gray-50">По рейтингу</button>
+                        <button onclick="sortProducts('name');toggleFilterMenu()" class="w-full text-left px-3 py-2 rounded-btn text-sm hover:bg-gray-50">По названию</button>
+                    </div>
+                </div>
+                <span id="catalogCount" class="text-sm text-gray-500"></span>
+            </div>
+            
+            <!-- Products Grid -->
+            <div id="catalogProducts" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"></div>
+            <div id="catalogEmpty" class="hidden text-center py-16">
+                <i data-lucide="search-x" class="w-12 h-12 text-gray-300 mx-auto mb-3"></i>
+                <p class="text-gray-500">Товары не найдены</p>
+            </div>
+        </div>
+
+        <!-- FAVORITES PAGE -->
+        <div id="page-favorites" class="page-content">
+            <h2 class="text-xl sm:text-2xl font-bold mb-6">Избранное</h2>
+            <div id="favoritesList" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"></div>
+            <div id="favoritesEmpty" class="hidden text-center py-16">
+                <i data-lucide="heart" class="w-12 h-12 text-gray-300 mx-auto mb-3"></i>
+                <p class="text-gray-500 mb-4">Вы ещё не добавили товары в избранное</p>
+                <button onclick="switchTab('catalog')" class="btn-primary text-white px-6 py-2 rounded-btn font-medium">Перейти в каталог</button>
+            </div>
+        </div>
+
+        <!-- CART PAGE -->
+        <div id="page-cart" class="page-content">
+            <div id="cartView">
+                <h2 class="text-xl sm:text-2xl font-bold mb-6">Корзина</h2>
+                <div id="cartItems" class="space-y-3"></div>
+                <div id="cartEmpty" class="hidden text-center py-16">
+                    <i data-lucide="shopping-cart" class="w-12 h-12 text-gray-300 mx-auto mb-3"></i>
+                    <p class="text-gray-500 mb-4">Корзина пуста</p>
+                    <button onclick="switchTab('catalog')" class="btn-primary text-white px-6 py-2 rounded-btn font-medium">Перейти в каталог</button>
+                </div>
+                <div id="cartSummary" class="hidden mt-6 bg-white rounded-card p-4 sm:p-6 card-shadow">
+                    <div class="space-y-2 text-sm mb-4">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Товары (<span id="cartItemCount">0</span> шт.)</span>
+                            <span id="cartSubtotal">0 ₽</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Доставка</span>
+                            <span class="text-green-500">Бесплатно</span>
+                        </div>
+                        <div class="flex justify-between font-bold text-lg pt-2 border-t">
+                            <span>Итого:</span>
+                            <span id="cartTotal" class="text-primary">0 ₽</span>
+                        </div>
+                    </div>
+                    <button onclick="openCheckout()" class="btn-primary w-full text-white py-3 rounded-btn font-semibold text-base">
+                        Перейти к оформлению
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROFILE PAGE -->
+        <div id="page-profile" class="page-content">
+            <div class="max-w-2xl mx-auto">
+                <!-- Profile Sub-tabs -->
+                <div class="flex gap-1 overflow-x-auto scrollbar-hide mb-6 bg-white rounded-btn p-1">
+                    <button class="profile-tab active flex-shrink-0 px-3 py-2 rounded-btn text-sm font-medium" onclick="switchProfileTab('info', this)">Профиль</button>
+                    <button class="profile-tab flex-shrink-0 px-3 py-2 rounded-btn text-sm font-medium" onclick="switchProfileTab('bank', this)">MPZZZ Банк</button>
+                    <button class="profile-tab flex-shrink-0 px-3 py-2 rounded-btn text-sm font-medium" onclick="switchProfileTab('my-fav', this)">Избранное</button>
+                    <button class="profile-tab flex-shrink-0 px-3 py-2 rounded-btn text-sm font-medium" onclick="switchProfileTab('purchases', this)">Покупки</button>
+                    <button class="profile-tab flex-shrink-0 px-3 py-2 rounded-btn text-sm font-medium" onclick="switchProfileTab('reviews', this)">Отзывы</button>
+                    <button class="profile-tab flex-shrink-0 px-3 py-2 rounded-btn text-sm font-medium" onclick="switchProfileTab('pickup', this)">Пункты</button>
+                </div>
+
+                <!-- Profile Info -->
+                <div id="profileTab-info" class="profile-section">
+                    <div class="bg-white rounded-card p-6 card-shadow">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-primary-light flex items-center justify-center text-white text-xl font-bold">
+                                АК
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg">Алексей Козлов</h3>
+                                <p class="text-gray-500 text-sm">Участник с 2024 года</p>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="text-sm text-gray-500 mb-1 block">Имя</label>
+                                <input type="text" value="Алексей" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-btn text-sm">
+                            </div>
+                            <div>
+                                <label class="text-sm text-gray-500 mb-1 block">Фамилия</label>
+                                <input type="text" value="Козлов" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-btn text-sm">
+                            </div>
+                            <div>
+                                <label class="text-sm text-gray-500 mb-1 block">Телефон</label>
+                                <input type="tel" value="+7 (999) 123-45-67" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-btn text-sm">
+                            </div>
+                            <div>
+                                <label class="text-sm text-gray-500 mb-1 block">Email</label>
+                                <input type="email" value="alexey@example.com" class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-btn text-sm">
+                            </div>
+                            <button onclick="showToast('Профиль сохранён', 'success')" class="btn-primary text-white px-6 py-2.5 rounded-btn font-medium w-full sm:w-auto">Сохранить изменения</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MPZZZ Bank -->
+                <div id="profileTab-bank" class="profile-section hidden">
+                    <div class="bank-card rounded-card p-6 text-white mb-6">
+                        <div class="flex justify-between items-start mb-8">
+                            <div>
+                                <p class="text-white/70 text-sm">MPZZZ Банк</p>
+                                <p class="text-2xl font-bold">4276 **** **** 8901</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-white/70 text-xs">Баланс баллов</p>
+                                <p class="text-xl font-bold">1,250</p>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-end">
+                            <div>
+                                <p class="text-white/70 text-xs">Держатель</p>
+                                <p class="font-medium">ALEXEY KOZLOV</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-white/70 text-xs">Срок</p>
+                                <p class="font-medium">12/28</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-card p-4 card-shadow mb-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-bold">История операций</h3>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between py-2 border-b border-gray-100">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                        <i data-lucide="arrow-down-left" class="w-4 h-4 text-green-500"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium">Начисление баллов</p>
+                                        <p class="text-xs text-gray-400">10 мая 2026</p>
+                                    </div>
+                                </div>
+                                <span class="text-green-500 font-semibold text-sm">+500</span>
+                            </div>
+                            <div class="flex items-center justify-between py-2 border-b border-gray-100">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
+                                        <i data-lucide="arrow-up-right" class="w-4 h-4 text-red-500"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium">Оплата заказа #1234</p>
+                                        <p class="text-xs text-gray-400">8 мая 2026</p>
+                                    </div>
+                                </div>
+                                <span class="text-red-500 font-semibold text-sm">-250</span>
+                            </div>
+                            <div class="flex items-center justify-between py-2">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                        <i data-lucide="arrow-down-left" class="w-4 h-4 text-green-500"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium">Бонус за регистрацию</p>
+                                        <p class="text-xs text-gray-400">1 мая 2026</p>
+                                    </div>
+                                </div>
+                                <span class="text-green-500 font-semibold text-sm">+1,000</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="showToast('Заявка на оформление карты отправлена', 'success')" class="btn-primary text-white w-full py-3 rounded-btn font-semibold">
+                        Оформить карту MPZZZ
+                    </button>
+                </div>
+
+                <!-- My Favorites (Profile) -->
+                <div id="profileTab-my-fav" class="profile-section hidden">
+                    <div id="profileFavoritesList" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
+                    <div id="profileFavEmpty" class="hidden text-center py-16">
+                        <i data-lucide="heart" class="w-12 h-12 text-gray-300 mx-auto mb-3"></i>
+                        <p class="text-gray-500">В избранном пусто</p>
+                    </div>
+                </div>
+
+                <!-- My Purchases -->
+                <div id="profileTab-purchases" class="profile-section hidden">
+                    <div class="space-y-3">
+                        <div class="bg-white rounded-card p-4 card-shadow">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="font-semibold text-sm">Заказ #MP-2026-0891</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-600 rounded-full text-xs font-medium">Доставлен</span>
+                            </div>
+                            <p class="text-xs text-gray-400 mb-3">5 мая 2026 · 2 товара · 12 490 ₽</p>
+                            <div class="flex gap-2">
+                                <span class="px-2 py-1 bg-gray-100 rounded text-xs">Наушники Sony</span>
+                                <span class="px-2 py-1 bg-gray-100 rounded text-xs">Чехол для телефона</span>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-card p-4 card-shadow">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="font-semibold text-sm">Заказ #MP-2026-0756</span>
+                                <span class="px-2 py-1 bg-blue-100 text-blue-600 rounded-full text-xs font-medium">В пути</span>
+                            </div>
+                            <p class="text-xs text-gray-400 mb-3">2 мая 2026 · 1 товар · 89 990 ₽</p>
+                            <div class="flex gap-2">
+                                <span class="px-2 py-1 bg-gray-100 rounded text-xs">Ноутбук ASUS</span>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-card p-4 card-shadow">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="font-semibold text-sm">Заказ #MP-2026-0623</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-600 rounded-full text-xs font-medium">Доставлен</span>
+                            </div>
+                            <p class="text-xs text-gray-400 mb-3">20 апреля 2026 · 3 товара · 5 670 ₽</p>
+                            <div class="flex gap-2">
+                                <span class="px-2 py-1 bg-gray-100 rounded text-xs">Клавиатура</span>
+                                <span class="px-2 py-1 bg-gray-100 rounded text-xs">Мышь</span>
+                                <span class="px-2 py-1 bg-gray-100 rounded text-xs">Коврик</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- My Reviews -->
+                <div id="profileTab-reviews" class="profile-section hidden">
+                    <div class="space-y-3">
+                        <div class="bg-white rounded-card p-4 card-shadow">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-semibold text-sm">Наушники Sony WH-1000XM5</span>
+                                <div class="review-stars">
+                                    <i data-lucide="star" class="w-3 h-3 star-filled fill-current"></i>
+                                    <i data-lucide="star" class="w-3 h-3 star-filled fill-current"></i>
+                                    <i data-lucide="star" class="w-3 h-3 star-filled fill-current"></i>
+                                    <i data-lucide="star" class="w-3 h-3 star-filled fill-current"></i>
+                                    <i data-lucide="star" class="w-3 h-3 star-filled fill-current"></i>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-2">Отличные наушники! Шумоподавление на высшем уровне.</p>
+                            <p class="text-xs text-gray-400">5 мая 2026</p>
+                        </div>
+                        <div class="bg-white rounded-card p-4 card-shadow">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-semibold text-sm">Механическая клавиатура Keychron</span>
+                                <div class="review-stars">
+                                    <i data-lucide="star" class="w-3 h-3 star-filled fill-current"></i>
+                                    <i data-lucide="star" class="w-3 h-3 star-filled fill-current"></i>
+                                    <i data-lucide="star" class="w-3 h-3 star-filled fill-current"></i>
+                                    <i data-lucide="star" class="w-3 h-3 star-filled fill-current"></i>
+                                    <i data-lucide="star" class="w-3 h-3 star-empty fill-current"></i>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-2">Хорошая клавиатура, но свитчи чуть громче, чем ожидал.</p>
+                            <p class="text-xs text-gray-400">22 апреля 2026</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pickup Points -->
+                <div id="profileTab-pickup" class="profile-section hidden">
+                    <div class="space-y-3">
+                        <div class="bg-white rounded-card p-4 card-shadow">
+                            <div class="flex items-start gap-3">
+                                <div class="w-10 h-10 bg-blue-100 rounded-btn flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="map-pin" class="w-5 h-5 text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-sm">Пункт выдачи №1</h4>
+                                    <p class="text-sm text-gray-500 mt-1">г. Тюмень, ул. Республики, д. 42</p>
+                                    <p class="text-xs text-gray-400 mt-1">Ежедневно 9:00–21:00</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-card p-4 card-shadow">
+                            <div class="flex items-start gap-3">
+                                <div class="w-10 h-10 bg-blue-100 rounded-btn flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="map-pin" class="w-5 h-5 text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-sm">Пункт выдачи №2</h4>
+                                    <p class="text-sm text-gray-500 mt-1">г. Тюмень, ул. Мельникайте, д. 113</p>
+                                    <p class="text-xs text-gray-400 mt-1">Ежедневно 10:00–20:00</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-card p-4 card-shadow">
+                            <div class="flex items-start gap-3">
+                                <div class="w-10 h-10 bg-blue-100 rounded-btn flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="map-pin" class="w-5 h-5 text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-sm">Пункт выдачи №3</h4>
+                                    <p class="text-sm text-gray-500 mt-1">г. Тюмень, ул. Ленина, д. 89/1</p>
+                                    <p class="text-xs text-gray-400 mt-1">Пн–Сб 9:00–19:00</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-card p-4 card-shadow">
+                            <div class="flex items-start gap-3">
+                                <div class="w-10 h-10 bg-blue-100 rounded-btn flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="map-pin" class="w-5 h-5 text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-sm">Пункт выдачи №4</h4>
+                                    <p class="text-sm text-gray-500 mt-1">г. Тюмень, Московский тракт, д. 146</p>
+                                    <p class="text-xs text-gray-400 mt-1">Ежедневно 8:00–22:00</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-card p-4 card-shadow">
+                            <div class="flex items-start gap-3">
+                                <div class="w-10 h-10 bg-blue-100 rounded-btn flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="map-pin" class="w-5 h-5 text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-sm">Пункт выдачи №5</h4>
+                                    <p class="text-sm text-gray-500 mt-1">г. Тюмень, ул. 50 лет Октября, д. 38</p>
+                                    <p class="text-xs text-gray-400 mt-1">Ежедневно 10:00–21:00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t mt-8">
+        <div class="max-w-7xl mx-auto px-4 py-8 sm:py-12">
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 mb-8">
+                <div>
+                    <h4 class="font-bold mb-3">MarketPlazzze</h4>
+                    <p class="text-sm text-gray-500">Всё для жизни в одном месте. Качественные товары по лучшим ценам.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-3">Покупателям</h4>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li><a href="#" class="hover:text-primary">Как сделать заказ</a></li>
+                        <li><a href="#" class="hover:text-primary">Доставка</a></li>
+                        <li><a href="#" class="hover:text-primary">Возврат товара</a></li>
+                        <li><a href="#" class="hover:text-primary">Баллы MPZZZ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-3">Компания</h4>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li><a href="#" class="hover:text-primary">О нас</a></li>
+                        <li><a href="#" class="hover:text-primary">Контакты</a></li>
+                        <li><a href="#" class="hover:text-primary">Вакансии</a></li>
+                        <li><a href="#" class="hover:text-primary">Партнёрам</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-3">Контакты</h4>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li class="flex items-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i> 8 (800) 123-45-67</li>
+                        <li class="flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4"></i> info@marketplazzze.ru</li>
+                        <li class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4"></i> Тюмень, Россия</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p class="text-sm text-gray-400">© 2026 MarketPlazzze. Все права защищены.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition">
+                        <i data-lucide="send" class="w-4 h-4"></i>
+                    </a>
+                    <a href="#" class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition">
+                        <i data-lucide="instagram" class="w-4 h-4"></i>
+                    </a>
+                    <a href="#" class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition">
+                        <i data-lucide="youtube" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ==================== DATA ====================
+        const productImages = [
+            'https://image.qwenlm.ai/public_source/7d00695c-9947-4fab-a461-6d9dbc676c6c/14966a9e0-c158-415b-9d3d-fb9d3f73ec6a.png',
+            'https://image.qwenlm.ai/public_source/7d00695c-9947-4fab-a461-6d9dbc676c6c/180f47cd9-3c1d-4940-8809-c8fee6529135.png',
+            'https://image.qwenlm.ai/public_source/7d00695c-9947-4fab-a461-6d9dbc676c6c/11af764c3-7ee0-4d0c-b37e-106f8d8e188e.png',
+            'https://image.qwenlm.ai/public_source/7d00695c-9947-4fab-a461-6d9dbc676c6c/1b755cfc8-8e61-42e2-b6c3-1356b7515b29.png',
+            'https://image.qwenlm.ai/public_source/7d00695c-9947-4fab-a461-6d9dbc676c6c/18b4c3c6e-bbdc-4487-8c0d-0f27d6e29365.png',
+            'https://image.qwenlm.ai/public_source/7d00695c-9947-4fab-a461-6d9dbc676c6c/140be0387-7571-4c2b-a906-2cbe66e99892.png',
+            'https://image.qwenlm.ai/public_source/7d00695c-9947-4fab-a461-6d9dbc676c6c/1480f8765-873e-451c-b5b6-1cea62b53e4d.png',
+            'https://image.qwenlm.ai/public_source/7d00695c-9947-4fab-a461-6d9dbc676c6c/190ed6e6b-ff0e-4038-8e58-92cab3ec3e50.png',
+            'https://image.qwenlm.ai/public_source/7d00695c-9947-4fab-a461-6d9dbc676c6c/1f8ce340f-4fd8-44a2-a550-c4a64a49253d.png',
+            'https://image.qwenlm.ai/public_source/7d00695c-9947-4fab-a461-6d9dbc676c6c/19c53c43d-afd7-4ce5-8988-f9d6cb5524c6.png',
+            'https://image.qwenlm.ai/public_source/7d00695c-9947-4fab-a461-6d9dbc676c6c/1f83cde91-256c-4a2a-9f7c-f042752e7a6a.png',
+            'https://image.qwenlm.ai/public_source/7d00695c-9947-4fab-a461-6d9dbc676c6c/16882a2c2-cc17-492a-a8cd-fa3719eb0cd3.png',
+            'https://image.qwenlm.ai/public_source/7d00695c-9947-4fab-a461-6d9dbc676c6c/1cda1be50-982c-41be-91df-3a4ef685f8aa.png',
+        ];
+
+        const popularProductsData = [
+            { id: 1, name: 'Наушники Sony WH-1000XM5', price: 24990, rating: 4.9, category: 'electronics', image: productImages[0] },
+            { id: 2, name: 'Умные часы Samsung Galaxy', price: 18990, rating: 4.7, category: 'electronics', image: productImages[1] },
+            { id: 3, name: 'Ноутбук ASUS VivoBook', price: 54990, rating: 4.8, category: 'electronics', image: productImages[2] },
+            { id: 4, name: 'Беспроводные наушники Pro', price: 7990, rating: 4.6, category: 'electronics', image: productImages[3] },
+            { id: 5, name: 'Смартфон Galaxy S24', price: 69990, rating: 4.9, category: 'electronics', image: productImages[4] },
+            { id: 6, name: 'Планшет iPad Air', price: 49990, rating: 4.8, category: 'electronics', image: productImages[5] },
+            { id: 7, name: 'Механическая клавиатура', price: 8490, rating: 4.5, category: 'accessories', image: productImages[6] },
+            { id: 8, name: 'Игровая мышь Logitech', price: 4990, rating: 4.7, category: 'accessories', image: productImages[7] },
+            { id: 9, name: 'Портативная колонка JBL', price: 6990, rating: 4.6, category: 'electronics', image: productImages[8] },
+            { id: 10, name: 'Повербанк Xiaomi 20000', price: 2990, rating: 4.4, category: 'accessories', image: productImages[9] },
+            { id: 11, name: 'Настольная лампа LED', price: 3490, rating: 4.3, category: 'home', image: productImages[10] },
+            { id: 12, name: 'Беспроводная зарядка', price: 1990, rating: 4.5, category: 'accessories', image: productImages[11] },
+        ];
+
+        const catalogAllProducts = [
+            ...popularProductsData,
+            { id: 13, name: 'Рюкзак городской серый', price: 3290, rating: 4.4, category: 'bags', image: productImages[12] },
+            { id: 14, name: 'Фитнес-браслет Xiaomi', price: 3990, rating: 4.5, category: 'electronics', image: 'https://image.pollinations.ai/prompt/fitness%20tracker%20smartband%20white%20background%20product%20photo?width=400&height=400&nologo=true' },
+            { id: 15, name: 'Bluetooth колонка Mini', price: 1990, rating: 4.2, category: 'electronics', image: 'https://image.pollinations.ai/prompt/small%20bluetooth%20speaker%20compact%20white%20background?width=400&height=400&nologo=true' },
+            { id: 16, name: 'USB-C Хаб 7в1', price: 2490, rating: 4.3, category: 'accessories', image: 'https://image.pollinations.ai/prompt/usb%20hub%20multiport%20adapter%20white%20background?width=400&height=400&nologo=true' },
+            { id: 17, name: 'Монитор 27" 4K', price: 32990, rating: 4.8, category: 'electronics', image: 'https://image.pollinations.ai/prompt/computer%20monitor%2027%20inch%204k%20white%20background?width=400&height=400&nologo=true' },
+            { id: 18, name: 'Веб-камера HD 1080p', price: 4490, rating: 4.4, category: 'electronics', image: 'https://image.pollinations.ai/prompt/webcam%20hd%201080p%20white%20background%20product?width=400&height=400&nologo=true' },
+            { id: 19, name: 'Кофейная кружка термо', price: 1290, rating: 4.6, category: 'home', image: 'https://image.pollinations.ai/prompt/thermal%20coffee%20mug%20stainless%20steel%20white%20background?width=400&height=400&nologo=true' },
+            { id: 20, name: 'Настольный органайзер', price: 1890, rating: 4.3, category: 'home', image: 'https://image.pollinations.ai/prompt/desk%20organizer%20pen%20holder%20modern%20white%20background?width=400&height=400&nologo=true' },
+            { id: 21, name: 'Механические часы', price: 12990, rating: 4.7, category: 'accessories', image: 'https://image.pollinations.ai/prompt/analog%20wristwatch%20classic%20leather%20strap%20white%20background?width=400&height=400&nologo=true' },
+            { id: 22, name: 'Сумка через плечо', price: 2790, rating: 4.5, category: 'bags', image: 'https://image.pollinations.ai/prompt/crossbody%20bag%20leather%20casual%20white%20background?width=400&height=400&nologo=true' },
+            { id: 23, name: 'Ароматическая свеча', price: 890, rating: 4.8, category: 'home', image: 'https://image.pollinations.ai/prompt/aromatic%20candle%20glass%20jar%20elegant%20white%20background?width=400&height=400&nologo=true' },
+            { id: 24, name: 'Портативный SSD 1TB', price: 6990, rating: 4.6, category: 'electronics', image: 'https://image.pollinations.ai/prompt/portable%20ssd%20external%20hard%20drive%20white%20background?width=400&height=400&nologo=true' },
+            { id: 25, name: 'Ночник LED умный', price: 1490, rating: 4.4, category: 'home', image: 'https://image.pollinations.ai/prompt/smart%20led%20night%20light%20modern%20white%20background?width=400&height=400&nologo=true' },
+            { id: 26, name: 'Кабель USB-C 2м', price: 690, rating: 4.3, category: 'accessories', image: 'https://image.pollinations.ai/prompt/usb%20c%20charging%20cable%20braided%20white%20background?width=400&height=400&nologo=true' },
+            { id: 27, name: 'Подставка для ноутбука', price: 2290, rating: 4.5, category: 'accessories', image: 'https://image.pollinations.ai/prompt/laptop%20stand%20aluminum%20adjustable%20white%20background?width=400&height=400&nologo=true' },
+            { id: 28, name: 'Термос 500мл', price: 1690, rating: 4.7, category: 'home', image: 'https://image.pollinations.ai/prompt/thermos%20flask%20500ml%20stainless%20steel%20white%20background?width=400&height=400&nologo=true' },
+        ];
+
+        // ==================== STATE ====================
+        let cart = [];
+        let favorites = [];
+        let currentTab = 'home';
+        let currentProfileTab = 'info';
+        let currentCategory = 'all';
+        let currentSort = 'default';
+        let infinitePage = 0;
+        let infiniteLoading = false;
+        let promoApplied = false;
+        let promoDiscount = 0;
+        let searchTimeout = null;
+
+        // ==================== INITIALIZATION ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            renderPopularProducts();
+            loadInfiniteProducts();
+            setupInfiniteScroll();
+            updateBadges();
+        });
+
+        // ==================== TAB NAVIGATION ====================
+        function switchTab(tabName) {
+            currentTab = tabName;
+            
+            // Hide all pages
+            document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
+            
+            // Show target page
+            const page = document.getElementById('page-' + tabName);
+            if (page) page.classList.add('active');
+            
+            // Update nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.dataset.tab === tabName) item.classList.add('active');
+            });
+            
+            // Render page content
+            if (tabName === 'cart') renderCart();
+            if (tabName === 'favorites') renderFavorites();
+            if (tabName === 'catalog') renderCatalog();
+            if (tabName === 'profile') renderProfileFavorites();
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            lucide.createIcons();
+        }
+
+        // ==================== PRODUCT CARD RENDERING ====================
+        function createProductCard(product, showQuickView = true) {
+            const isFav = favorites.includes(product.id);
+            const stars = renderStars(product.rating);
+            
+            return `
+                <div class="product-card bg-white rounded-card overflow-hidden card-shadow card-shadow-hover group animate-slideUp" data-id="${product.id}">
+                    <div class="relative aspect-square bg-gray-50 overflow-hidden cursor-pointer" onclick="openQuickView(${product.id})">
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+                        <button onclick="event.stopPropagation();toggleFavorite(${product.id})" class="absolute top-2 right-2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-transform ${isFav ? 'text-red-500' : 'text-gray-400'}">
+                            <i data-lucide="heart" class="w-4 h-4 ${isFav ? 'fill-current' : ''}" id="heart-${product.id}"></i>
+                        </button>
+                    </div>
+                    <div class="p-3">
+                        <p class="text-sm font-medium line-clamp-2 mb-1 leading-snug">${product.name}</p>
+                        <div class="flex items-center gap-1 mb-2">${stars}<span class="text-xs text-gray-400 ml-1">${product.rating}</span></div>
+                        <p class="text-base font-bold text-primary mb-2">${product.price.toLocaleString('ru-RU')} ₽</p>
+                        <button onclick="addToCart(${product.id})" class="w-full btn-primary text-white py-2 rounded-btn text-sm font-medium flex items-center justify-center gap-1.5">
+                            <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+                            В корзину
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderStars(rating) {
+            let html = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= Math.floor(rating)) {
+                    html += '<i data-lucide="star" class="w-3 h-3 star-filled fill-current"></i>';
+                } else if (i - 0.5 <= rating) {
+                    html += '<i data-lucide="star-half" class="w-3 h-3 star-filled fill-current"></i>';
+                } else {
+                    html += '<i data-lucide="star" class="w-3 h-3 star-empty"></i>';
+                }
+            }
+            return html;
+        }
+
+        // ==================== POPULAR PRODUCTS ====================
+        function renderPopularProducts() {
+            const container = document.getElementById('popularProducts');
+            container.innerHTML = popularProductsData.map(p => createProductCard(p)).join('');
+            lucide.createIcons();
+        }
+
+        // ==================== INFINITE SCROLL ====================
+        const infiniteProductNames = [
+            'Беспроводной адаптер Wi-Fi 6', 'Док-станция для телефона', 'Мини-проектор портативный',
+            'Умная розетка Wi-Fi', 'Кольцевая лампа для стримов', 'Графический планшет',
+            'Электронная книга 6"', 'Флешка USB 3.0 128GB', 'Геймпад беспроводной',
+            'Микрофон студийный', 'Сабвуфер компьютерный', 'Клавиатура Bluetooth складная',
+            'Сетевой фильтр 6 розеток', 'Коврик для мыши XL', 'Подвесной светильник LED',
+            'Настольный вентилятор USB', 'Органайзер для проводов', 'Зеркало с подсветкой',
+            'Подушка для ноутбука', 'Держатель для телефона авто', 'Антистресс игрушка',
+            'Настольный календарь 2026', 'Блокнот A5 кожаный', 'Ручка шариковая premium',
+            'Зарядное устройство GaN 65W', 'Стилус для планшета', 'Хаб Thunderbolt 4',
+            'Монитор портативный 15.6"', 'Веб-камера 4K', 'Динамики компьютерные 2.0',
+        ];
+
+        const infiniteCategories = ['electronics', 'accessories', 'home', 'bags'];
+        const infinitePrices = [490, 690, 890, 1290, 1490, 1990, 2490, 2990, 3490, 4990, 5990, 7990, 9990, 12990, 19990, 24990];
+
+        function loadInfiniteProducts() {
+            const container = document.getElementById('infiniteProducts');
+            const batchSize = 8;
+            
+            let html = '';
+            for (let i = 0; i < batchSize; i++) {
+                const idx = infinitePage * batchSize + i;
+                if (idx >= infiniteProductNames.length) break;
+                
+                const product = {
+                    id: 100 + idx,
+                    name: infiniteProductNames[idx],
+                    price: infinitePrices[Math.floor(Math.random() * infinitePrices.length)],
+                    rating: (3.5 + Math.random() * 1.5).toFixed(1),
+                    category: infiniteCategories[Math.floor(Math.random() * infiniteCategories.length)],
+                    image: `https://image.pollinations.ai/prompt/${encodeURIComponent(infiniteProductNames[idx] + ' product photo white background minimal clean')}?width=400&height=400&nologo=true&seed=${idx + infinitePage * 100}`
+                };
+                
+                html += createProductCard(product);
+            }
+            
+            container.innerHTML += html;
+            lucide.createIcons();
+            infinitePage++;
+        }
+
+        function setupInfiniteScroll() {
+            window.addEventListener('scroll', () => {
+                if (currentTab !== 'home') return;
+                if (infiniteLoading) return;
+                
+                const scrollBottom = window.innerHeight + window.scrollY;
+                const docHeight = document.documentElement.scrollHeight;
+                
+                if (scrollBottom >= docHeight - 500) {
+                    infiniteLoading = true;
+                    const loader = document.getElementById('infiniteLoader');
+                    loader.style.display = 'flex';
+                    
+                    setTimeout(() => {
+                        loadInfiniteProducts();
+                        infiniteLoading = false;
+                        
+                        if (infinitePage >= 5) {
+                            loader.style.display = 'none';
+                        }
+                    }, 800);
+                }
+            });
+        }
+
+        // ==================== CATALOG ====================
+        function renderCatalog() {
+            let products = [...catalogAllProducts];
+            
+            // Filter by category
+            if (currentCategory !== 'all') {
+                products = products.filter(p => p.category === currentCategory);
+            }
+            
+            // Filter by search
+            const searchVal = document.getElementById('catalogSearch')?.value?.toLowerCase() || '';
+            if (searchVal) {
+                products = products.filter(p => p.name.toLowerCase().includes(searchVal));
+            }
+            
+            // Sort
+            switch (currentSort) {
+                case 'price-asc': products.sort((a, b) => a.price - b.price); break;
+                case 'price-desc': products.sort((a, b) => b.price - a.price); break;
+                case 'rating': products.sort((a, b) => b.rating - a.rating); break;
+                case 'name': products.sort((a, b) => a.name.localeCompare(b.name)); break;
+            }
+            
+            const container = document.getElementById('catalogProducts');
+            const emptyEl = document.getElementById('catalogEmpty');
+            const countEl = document.getElementById('catalogCount');
+            
+            countEl.textContent = `${products.length} товаров`;
+            
+            if (products.length === 0) {
+                container.innerHTML = '';
+                emptyEl.classList.remove('hidden');
+            } else {
+                emptyEl.classList.add('hidden');
+                container.innerHTML = products.map(p => createProductCard(p)).join('');
+            }
+            
+            lucide.createIcons();
+        }
+
+        function selectCategory(el, category) {
+            currentCategory = category;
+            document.querySelectorAll('#catalogCategories .category-chip').forEach(c => c.classList.remove('active'));
+            el.classList.add('active');
+            renderCatalog();
+        }
+
+        function sortProducts(sortType) {
+            currentSort = sortType;
+            renderCatalog();
+        }
+
+        function filterCatalog() {
+            renderCatalog();
+        }
+
+        function toggleFilterMenu() {
+            document.getElementById('filterMenu').classList.toggle('show');
+        }
+
+        function handleHeaderSearch(value) {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                if (value.trim()) {
+                    switchTab('catalog');
+                    document.getElementById('catalogSearch').value = value;
+                    renderCatalog();
+                }
+            }, 500);
+        }
+
+        function showSearchDropdown() {
+            const dropdown = document.getElementById('searchDropdown');
+            const val = document.getElementById('headerSearch').value.trim().toLowerCase();
+            
+            if (!val) {
+                dropdown.classList.remove('show');
+                return;
+            }
+            
+            const matches = catalogAllProducts.filter(p => p.name.toLowerCase().includes(val)).slice(0, 5);
+            
+            if (matches.length === 0) {
+                dropdown.innerHTML = '<div class="p-3 text-sm text-gray-400 text-center">Ничего не найдено</div>';
+            } else {
+                dropdown.innerHTML = matches.map(p => `
+                    <div class="flex items-center gap-3 p-3 hover:bg-gray-50 cursor-pointer" onclick="switchTab('catalog');document.getElementById('catalogSearch').value='${p.name}';renderCatalog();">
+                        <img src="${p.image}" class="w-10 h-10 rounded-lg object-cover" alt="">
+                        <div>
+                            <p class="text-sm font-medium">${p.name}</p>
+                            <p class="text-xs text-primary font-semibold">${p.price.toLocaleString('ru-RU')} ₽</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            dropdown.classList.add('show');
+            lucide.createIcons();
+        }
+
+        function hideSearchDropdown() {
+            document.getElementById('searchDropdown').classList.remove('show');
+        }
+
+        // ==================== CART ====================
+        function findProductById(id) {
+            return catalogAllProducts.find(p => p.id === id) || popularProductsData.find(p => p.id === id);
+        }
+
+        function addToCart(productId) {
+            const existing = cart.find(item => item.id === productId);
+            if (existing) {
+                existing.qty++;
+            } else {
+                cart.push({ id: productId, qty: 1 });
+            }
+            
+            // Animate cart icon
+            const cartIcon = document.getElementById('cartIcon');
+            if (cartIcon) {
+                cartIcon.classList.add('animate-cartBounce');
+                setTimeout(() => cartIcon.classList.remove('animate-cartBounce'), 400);
+            }
+            
+            updateBadges();
+            
+            const product = findProductById(productId);
+            showToast(`«${product.name}» добавлен в корзину`, 'success');
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            renderCart();
+            updateBadges();
+            showToast('Товар удалён из корзины', 'info');
+        }
+
+        function updateCartQty(productId, delta) {
+            const item = cart.find(i => i.id === productId);
+            if (!item) return;
+            
+            item.qty += delta;
+            if (item.qty <= 0) {
+                removeFromCart(productId);
+                return;
+            }
+            
+            renderCart();
+            updateBadges();
+        }
+
+        function renderCart() {
+            const container = document.getElementById('cartItems');
+            const emptyEl = document.getElementById('cartEmpty');
+            const summaryEl = document.getElementById('cartSummary');
+            
+            if (cart.length === 0) {
+                container.innerHTML = '';
+                emptyEl.classList.remove('hidden');
+                summaryEl.classList.add('hidden');
+                return;
+            }
+            
+            emptyEl.classList.add('hidden');
+            summaryEl.classList.remove('hidden');
+            
+            let totalItems = 0;
+            let totalPrice = 0;
+            
+            container.innerHTML = cart.map(item => {
+                const product = findProductById(item.id);
+                if (!product) return '';
+                
+                const itemTotal = product.price * item.qty;
+                totalItems += item.qty;
+                totalPrice += itemTotal;
+                
+                return `
+                    <div class="bg-white rounded-card p-4 card-shadow flex gap-4 animate-slideUp">
+                        <img src="${product.image}" alt="${product.name}" class="w-20 h-20 sm:w-24 sm:h-24 rounded-btn object-cover flex-shrink-0">
+                        <div class="flex-1 min-w-0">
+                            <h4 class="text-sm font-medium line-clamp-2 mb-1">${product.name}</h4>
+                            <p class="text-primary font-bold text-sm mb-2">${product.price.toLocaleString('ru-RU')} ₽</p>
+                            <div class="flex items-center gap-3">
+                                <div class="flex items-center border border-gray-200 rounded-btn overflow-hidden">
+                                    <button onclick="updateCartQty(${item.id}, -1)" class="qty-btn text-gray-500 hover:text-white">
+                                        <i data-lucide="minus" class="w-3 h-3"></i>
+                                    </button>
+                                    <span class="px-3 text-sm font-medium">${item.qty}</span>
+                                    <button onclick="updateCartQty(${item.id}, 1)" class="qty-btn text-gray-500 hover:text-white">
+                                        <i data-lucide="plus" class="w-3 h-3"></i>
+                                    </button>
+                                </div>
+                                <span class="text-sm font-bold">${itemTotal.toLocaleString('ru-RU')} ₽</span>
+                                <button onclick="removeFromCart(${item.id})" class="ml-auto text-gray-400 hover:text-red-500 transition">
+                                    <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            document.getElementById('cartItemCount').textContent = totalItems;
+            document.getElementById('cartSubtotal').textContent = totalPrice.toLocaleString('ru-RU') + ' ₽';
+            document.getElementById('cartTotal').textContent = totalPrice.toLocaleString('ru-RU') + ' ₽';
+            
+            lucide.createIcons();
+        }
+
+        // ==================== FAVORITES ====================
+        function toggleFavorite(productId) {
+            const idx = favorites.indexOf(productId);
+            const heartEl = document.getElementById('heart-' + productId);
+            
+            if (idx > -1) {
+                favorites.splice(idx, 1);
+                showToast('Удалено из избранного', 'info');
+                if (heartEl) {
+                    heartEl.classList.remove('fill-current', 'text-red-500');
+                    heartEl.classList.add('text-gray-400');
+                }
+            } else {
+                favorites.push(productId);
+                showToast('Добавлено в избранное', 'success');
+                if (heartEl) {
+                    heartEl.classList.add('fill-current', 'text-red-500');
+                    heartEl.classList.remove('text-gray-400');
+                    heartEl.classList.add('animate-heartBeat');
+                    setTimeout(() => heartEl.classList.remove('animate-heartBeat'), 600);
+                }
+            }
+            
+            updateBadges();
+        }
+
+        function renderFavorites() {
+            const container = document.getElementById('favoritesList');
+            const emptyEl = document.getElementById('favoritesEmpty');
+            
+            if (favorites.length === 0) {
+                container.innerHTML = '';
+                emptyEl.classList.remove('hidden');
+                return;
+            }
+            
+            emptyEl.classList.add('hidden');
+            const favProducts = favorites.map(id => findProductById(id)).filter(Boolean);
+            container.innerHTML = favProducts.map(p => createProductCard(p)).join('');
+            lucide.createIcons();
+        }
+
+        function renderProfileFavorites() {
+            const container = document.getElementById('profileFavoritesList');
+            const emptyEl = document.getElementById('profileFavEmpty');
+            
+            if (favorites.length === 0) {
+                container.innerHTML = '';
+                emptyEl.classList.remove('hidden');
+                return;
+            }
+            
+            emptyEl.classList.add('hidden');
+            const favProducts = favorites.map(id => findProductById(id)).filter(Boolean);
+            container.innerHTML = favProducts.map(p => createProductCard(p)).join('');
+            lucide.createIcons();
+        }
+
+        // ==================== QUICK VIEW ====================
+        function openQuickView(productId) {
+            const product = findProductById(productId);
+            if (!product) return;
+            
+            const isFav = favorites.includes(product.id);
+            const stars = renderStars(product.rating);
+            
+            document.getElementById('quickViewContent').innerHTML = `
+                <div class="grid grid-cols-1 sm:grid-cols-2">
+                    <div class="aspect-square bg-gray-50">
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex flex-col justify-between">
+                        <div>
+                            <p class="text-xs text-gray-400 uppercase tracking-wide mb-2">${getCategoryName(product.category)}</p>
+                            <h3 class="text-lg font-bold mb-2">${product.name}</h3>
+                            <div class="flex items-center gap-2 mb-4">${stars}<span class="text-sm text-gray-500">${product.rating} · 124 отзыва</span></div>
+                            <p class="text-2xl font-bold text-primary mb-4">${product.price.toLocaleString('ru-RU')} ₽</p>
+                            <p class="text-sm text-gray-600 mb-6">Высококачественный товар с гарантией производителя. Бесплатная доставка при заказе от 3000 ₽.</p>
+                        </div>
+                        <div class="flex gap-3">
+                            <button onclick="addToCart(${product.id});closeQuickView();" class="flex-1 btn-primary text-white py-3 rounded-btn font-semibold flex items-center justify-center gap-2">
+                                <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+                                В корзину
+                            </button>
+                            <button onclick="toggleFavorite(${product.id});openQuickView(${product.id});" class="w-12 h-12 border-2 border-gray-200 rounded-btn flex items-center justify-center hover:border-red-300 transition ${isFav ? 'text-red-500 border-red-300' : 'text-gray-400'}">
+                                <i data-lucide="heart" class="w-5 h-5 ${isFav ? 'fill-current' : ''}"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('quickViewModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            lucide.createIcons();
+        }
+
+        function closeQuickView() {
+            document.getElementById('quickViewModal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        function getCategoryName(cat) {
+            const names = { electronics: 'Электроника', accessories: 'Аксессуары', home: 'Для дома', bags: 'Сумки' };
+            return names[cat] || cat;
+        }
+
+        // ==================== CHECKOUT ====================
+        function openCheckout() {
+            if (cart.length === 0) return;
+            
+            let subtotal = 0;
+            cart.forEach(item => {
+                const product = findProductById(item.id);
+                if (product) subtotal += product.price * item.qty;
+            });
+            
+            document.getElementById('checkoutSubtotal').textContent = subtotal.toLocaleString('ru-RU') + ' ₽';
+            document.getElementById('checkoutTotal').textContent = (subtotal + 299).toLocaleString('ru-RU') + ' ₽';
+            document.getElementById('checkoutDelivery').textContent = '299 ₽';
+            
+            promoApplied = false;
+            promoDiscount = 0;
+            document.getElementById('checkoutDiscountRow').style.display = 'none';
+            document.getElementById('promoInput').value = '';
+            document.getElementById('useBonusPoints').checked = false;
+            document.getElementById('promoResult').classList.add('hidden');
+            
+            document.getElementById('checkoutModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            
+            lucide.createIcons();
+        }
+
+        function closeCheckout() {
+            document.getElementById('checkoutModal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        function updateCheckoutTotal() {
+            let subtotal = 0;
+            cart.forEach(item => {
+                const product = findProductById(item.id);
+                if (product) subtotal += product.price * item.qty;
+            });
+            
+            let delivery = 299;
+            const deliveryRadio = document.querySelector('input[name="delivery"]:checked');
+            if (deliveryRadio) {
+                if (deliveryRadio.value === 'pickup') delivery = 0;
+                if (deliveryRadio.value === 'express') delivery = 599;
+            }
+            
+            let bonusDiscount = 0;
+            if (document.getElementById('useBonusPoints').checked) {
+                bonusDiscount = 125;
+            }
+            
+            let total = subtotal + delivery - promoDiscount - bonusDiscount;
+            if (total < 0) total = 0;
+            
+            document.getElementById('checkoutDelivery').textContent = delivery === 0 ? 'Бесплатно' : delivery + ' ₽';
+            document.getElementById('checkoutTotal').textContent = total.toLocaleString('ru-RU') + ' ₽';
+        }
+
+        function applyPromo() {
+            const code = document.getElementById('promoInput').value.trim().toUpperCase();
+            const resultEl = document.getElementById('promoResult');
+            
+            if (code === 'SALE10') {
+                promoApplied = true;
+                promoDiscount = Math.floor(calculateSubtotal() * 0.1);
+                resultEl.textContent = 'Промокод применён! Скидка 10%';
+                resultEl.className = 'text-xs mt-2 text-green-500 font-medium';
+                resultEl.classList.remove('hidden');
+                document.getElementById('checkoutDiscount').textContent = '-' + promoDiscount.toLocaleString('ru-RU') + ' ₽';
+                document.getElementById('checkoutDiscountRow').style.display = 'flex';
+            } else if (code === 'FIRST') {
+                promoApplied = true;
+                promoDiscount = 500;
+                resultEl.textContent = 'Промокод применён! Скидка 500 ₽';
+                resultEl.className = 'text-xs mt-2 text-green-500 font-medium';
+                resultEl.classList.remove('hidden');
+                document.getElementById('checkoutDiscount').textContent = '-' + promoDiscount.toLocaleString('ru-RU') + ' ₽';
+                document.getElementById('checkoutDiscountRow').style.display = 'flex';
+            } else if (code === '') {
+                resultEl.textContent = 'Введите промокод';
+                resultEl.className = 'text-xs mt-2 text-red-500';
+                resultEl.classList.remove('hidden');
+            } else {
+                resultEl.textContent = 'Промокод не найден';
+                resultEl.className = 'text-xs mt-2 text-red-500';
+                resultEl.classList.remove('hidden');
+                promoApplied = false;
+                promoDiscount = 0;
+                document.getElementById('checkoutDiscountRow').style.display = 'none';
+            }
+            
+            updateCheckoutTotal();
+        }
+
+        function calculateSubtotal() {
+            let subtotal = 0;
+            cart.forEach(item => {
+                const product = findProductById(item.id);
+                if (product) subtotal += product.price * item.qty;
+            });
+            return subtotal;
+        }
+
+        function placeOrder() {
+            closeCheckout();
+            document.getElementById('orderSuccessModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            lucide.createIcons();
+        }
+
+        function closeOrderSuccess() {
+            document.getElementById('orderSuccessModal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        // ==================== PROFILE ====================
+        function switchProfileTab(tabName, btnEl) {
+            document.querySelectorAll('.profile-section').forEach(s => s.classList.add('hidden'));
+            document.getElementById('profileTab-' + tabName).classList.remove('hidden');
+            
+            document.querySelectorAll('.profile-tab').forEach(t => t.classList.remove('active'));
+            btnEl.classList.add('active');
+            
+            if (tabName === 'my-fav') renderProfileFavorites();
+            
+            lucide.createIcons();
+        }
+
+        // ==================== BADGES ====================
+        function updateBadges() {
+            const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
+            const favCount = favorites.length;
+            
+            // Cart badges
+            ['cartBadge', 'cartBadgeMobile'].forEach(id => {
+                const el = document.getElementById(id);
+                if (cartCount > 0) {
+                    el.textContent = cartCount;
+                    el.classList.remove('hidden');
+                } else {
+                    el.classList.add('hidden');
+                }
+            });
+            
+            // Favorites badges
+            ['favBadge', 'favBadgeMobile'].forEach(id => {
+                const el = document.getElementById(id);
+                if (favCount > 0) {
+                    el.textContent = favCount;
+                    el.classList.remove('hidden');
+                } else {
+                    el.classList.add('hidden');
+                }
+            });
+        }
+
+        // ==================== TOASTS ====================
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            
+            const colors = {
+                success: 'bg-green-500',
+                info: 'bg-primary',
+                error: 'bg-red-500',
+            };
+            
+            const icons = {
+                success: 'check-circle',
+                info: 'info',
+                error: 'alert-circle',
+            };
+            
+            toast.className = `animate-toastSlide flex items-center gap-3 px-4 py-3 rounded-btn shadow-lg text-white text-sm font-medium ${colors[type] || colors.info}`;
+            toast.innerHTML = `
+                <i data-lucide="${icons[type] || icons.info}" class="w-4 h-4 flex-shrink-0"></i>
+                <span>${message}</span>
+            `;
+            
+            container.appendChild(toast);
+            lucide.createIcons();
+            
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(100%)';
+                toast.style.transition = 'all 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 2500);
+        }
+
+        // ==================== EVENT LISTENERS ====================
+        // Close filter menu on outside click
+        document.addEventListener('click', (e) => {
+            const filterMenu = document.getElementById('filterMenu');
+            const filterDropdown = document.querySelector('.filter-dropdown');
+            if (filterMenu && filterDropdown && !filterDropdown.contains(e.target)) {
+                filterMenu.classList.remove('show');
+            }
+        });
+
+        // Update checkout total on delivery change
+        document.addEventListener('change', (e) => {
+            if (e.target.name === 'delivery') {
+                updateCheckoutTotal();
+            }
+        });
+
+        // Keyboard shortcut: Escape to close modals
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeQuickView();
+                closeCheckout();
+                closeOrderSuccess();
+            }
+        });
+    </script>
+</body>
+</html>
+
